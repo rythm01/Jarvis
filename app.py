@@ -1,5 +1,11 @@
 import openai
+import os
+from dotenv import load_dotenv
+from os.path import join, dirname
 import streamlit as st
+
+dotenv_path = join(dirname(__file__), ".env")
+load_dotenv(dotenv_path)
 
 # Use Streamlit's dark theme
 st.markdown(
@@ -18,7 +24,7 @@ st.markdown(
 )
 
 st.title("Jarvis")
-openai.api_key = st.secrets["API_KEY"]
+openai.api_key = os.environ.get("API_KEY")
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
